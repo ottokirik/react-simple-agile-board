@@ -1,6 +1,6 @@
 import { stringify } from 'query-string';
 
-const DOMAIN = 'http://localhost:3001';
+export const DOMAIN = 'http://localhost:3001';
 
 class ApiCall {
   constructor(domain) {
@@ -47,4 +47,6 @@ class ApiCall {
   }
 }
 
-export default new ApiCall(DOMAIN);
+const apiService = new ApiCall(DOMAIN);
+
+export { apiService };
