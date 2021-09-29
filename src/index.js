@@ -9,11 +9,9 @@ const store = RootStore.create({});
 export const StoreContext = createContext(store);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <StoreContext.Provider value={store}>
-      <CssBaseline />
-      <App />
-    </StoreContext.Provider>
-  </React.StrictMode>,
+  <StoreContext.Provider value={store}>
+    <CssBaseline />
+    <App />
+  </StoreContext.Provider>,
   document.getElementById('root')
 );
