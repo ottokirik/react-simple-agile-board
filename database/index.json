@@ -146,6 +146,12 @@
           "title": "Task 4",
           "description": "5555",
           "assignee": "1"
+        },
+        {
+          "id": "4458aa05-dfb8-4e12-a947-b06af4804a5a",
+          "title": "Another Task",
+          "description": "Another Task",
+          "assignee": "2"
         }
       ],
       "id": "OPEN"
@@ -157,6 +163,12 @@
           "title": "Task 2",
           "description": "Task some task description 3",
           "assignee": "1"
+        },
+        {
+          "id": "27714aff-46a8-40c8-b5f6-7d4b0b84c4ba",
+          "title": "Create",
+          "description": "Create mobx state for app's",
+          "assignee": "9"
         },
         {
           "id": "3",

@@ -1,5 +1,7 @@
 import { apiService } from 'api';
 import { types, flow, getParent, onSnapshot, cast } from 'mobx-state-tree';
+import { v4 as uuidv4 } from 'uuid';
+
 import { User } from './users';
 
 const Task = types.model('Task', {
@@ -65,6 +67,14 @@ const Board = types
         const [task] = fromSection.tasks.splice(taskToMoveIndex, 1);
 
         toSection.tasks.splice(destination.index, 0, task.toJSON());
+      },
+      addTask(sectionId, payload) {
+        const sectionToAddTask = self.sections.find(
+          (section) => section.id === sectionId
+        );
+
+        // В реальном приложении отправить задачу на сервер и потом обновить списки
+        sectionToAddTask.tasks.push({ id: uuidv4(), ...payload });
       },
     };
   });

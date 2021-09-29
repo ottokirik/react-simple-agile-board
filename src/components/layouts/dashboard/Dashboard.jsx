@@ -1,9 +1,10 @@
-import { Box, Grid, Paper, Typography } from '@material-ui/core';
+import { Box, Button, Grid, Paper, Typography } from '@material-ui/core';
 import { useStore } from 'hooks/useStore';
 import { observer } from 'mobx-react-lite';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Column } from './Column';
+import { NewTaskForm } from './NewTaskForm';
 
 const getListStyle = (isDraggingOver) => ({
   backgroundColor: isDraggingOver ? 'lightblue' : 'lightgray',
@@ -13,6 +14,11 @@ const getListStyle = (isDraggingOver) => ({
 
 const Dashboard = observer(() => {
   const { boards } = useStore();
+  const [addNewTask, setAddNewTask] = useState(null);
+
+  const closeDialog = useCallback(() => {
+    setAddNewTask(null);
+  }, [setAddNewTask]);
 
   const onDragEnd = useCallback(
     (event) => {
@@ -35,9 +41,16 @@ const Dashboard = observer(() => {
                     p={1}
                     display="flex"
                     alignItems="center"
-                    justifyContent="center"
+                    justifyContent="space-between"
                   >
                     <Typography variant="h5">{section?.title}</Typography>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => setAddNewTask(section.id)}
+                    >
+                      Add task
+                    </Button>
                   </Box>
                   <Droppable droppableId={section.id}>
                     {(provided, snapshot) => (
@@ -57,6 +70,11 @@ const Dashboard = observer(() => {
           })}
         </Grid>
       </DragDropContext>
+      <NewTaskForm
+        isOpen={!!addNewTask}
+        handleClose={closeDialog}
+        sectionId={addNewTask}
+      />
     </Box>
   );
 });
