@@ -20,7 +20,7 @@ class ApiCall {
   }
 
   async get(path, searchParams = {}) {
-    return await this.perform({ url: `${path}/?${stringify(searchParams)}` });
+    return await this.perform({ url: `${path}${stringify(searchParams)}` });
   }
 
   async post(path, payload) {

@@ -26,6 +26,9 @@ const BoardSection = types
 
         self.tasks = tasks;
       }),
+      afterCreate() {
+        self.load();
+      },
     };
   });
 
@@ -38,7 +41,7 @@ const Board = types.model('Board', {
 const BoardStore = types
   .model('BoardStore', {
     boards: types.array(Board),
-    active: types.safeReference(Board),
+    active: types.safeReference(Board), // Visible board
   })
   .actions((self) => {
     return {
