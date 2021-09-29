@@ -2,7 +2,7 @@ import {
   AppBar,
   FormControl,
   Grid,
-  MenuItem,
+  option,
   Select,
   Toolbar,
   Typography,
@@ -25,17 +25,21 @@ export const Header = observer(() => {
               <FormControl variant="outlined">
                 <Select
                   style={{ backgroundColor: 'white', marginLeft: 10 }}
+                  native
                   value={boards?.active?.id || ''}
-                  onChange={() => {}}
+                  onChange={(event) => {
+                    const { value } = event.target;
+                    boards.selectBoard(value);
+                  }}
                 >
-                  <MenuItem value="" disabled>
+                  <option value="" disabled>
                     -
-                  </MenuItem>
+                  </option>
                   {boards.list.map((board) => {
                     return (
-                      <MenuItem key={board.id} value={board?.id}>
+                      <option key={board.id} value={board?.id}>
                         {board?.title}
-                      </MenuItem>
+                      </option>
                     );
                   })}
                 </Select>
