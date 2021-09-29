@@ -1,6 +1,7 @@
 import { Box, Grid, Paper, Typography } from '@material-ui/core';
 import { useStore } from 'hooks/useStore';
 import { observer } from 'mobx-react-lite';
+import { useCallback } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Column } from './Column';
 
@@ -13,9 +14,18 @@ const getListStyle = (isDraggingOver) => ({
 const Dashboard = observer(() => {
   const { boards } = useStore();
 
+  const onDragEnd = useCallback(
+    (event) => {
+      const { source, destination, draggableId: taskId } = event;
+
+      boards.active.moveTask({ taskId, source, destination });
+    },
+    [boards]
+  );
+
   return (
     <Box p={2}>
-      <DragDropContext onDragEnd={() => {}}>
+      <DragDropContext onDragEnd={onDragEnd}>
         <Grid container spacing={3}>
           {boards.active?.sections.map((section) => {
             return (
